@@ -1,0 +1,16 @@
+.col-md-4 {
+    border: 1px solid darkgrey;
+    margin-top: 30px;
+    padding-bottom: 10px;
+    
+}
+#button {
+    color: white;
+    text-decoration: none;
+    
+}
+
+.btn-primary {
+    margin-top: 50px;
+}
+
