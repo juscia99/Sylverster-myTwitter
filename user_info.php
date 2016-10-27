@@ -12,6 +12,7 @@ if (!isset($_SESSION['logged_user_id'])) {
 
 $loggedUserId = intval($_SESSION['logged_user_id']);
 $date = date('Y-m-d H:i:s');
+$information = "";
 
 if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     $userId = intval($_GET['user_id']);
@@ -27,7 +28,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $newMessage->setRecipientId($userId);
     $newMessage->setSenderId($loggedUserId);
     $newMessage->saveToDB($conn);
-    echo "Message sent.<br>";
+    $information = "<h4>Message sent.</h4>";
 }
 ?>
 
@@ -60,6 +61,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             <div class="row">
                 <div class="col-md-6">
                     <p>
+                        <?php echo $information; ?>
+                    </p>
+                    <p>
                         Send message to:<br/>
                         <?php
                         $user = User::loadUserById($conn, $userId);
@@ -79,6 +83,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 </div>
             </div>
             <div class="row">
+                <h3>User Meows:</h3>
                 <?php
                 $userMeowsArray = Meow::loadAllMeowsByUserId($conn, $userId);
                 foreach ($userMeowsArray as $meow) {
